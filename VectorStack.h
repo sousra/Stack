@@ -2,17 +2,40 @@
 #include "StackImpl.h"
 #include "MyVector.h"
 
-class VectorStack : public StackImpl {
+template<class T>
+class VectorStack : public StackImpl<T> {
 public:
-    VectorStack() { _container =  MyVector(); }
-    VectorStack(const VectorStack& other) { }
-
-    void push(ValueType value) override { _container.pushBack(value); }
-    void pop() override { _container.popBack(); }
-    ValueType top() const override { return _container.back(); }
-    size_t size() const noexcept override { return _container.size(); }
-    bool empty() const noexcept override { return !size(); }
+    void push(T value) override;
+    void pop() override;
+    T& top() const override;
+    size_t size() const noexcept override;
+    bool empty() const noexcept override;
 
 private:
-    MyVector _container;
+    MyVector<T> _container;
 };
+
+template<class T>
+void VectorStack<T>::push(T value) {
+    _container.pushBack(value);
+}
+
+template<class T>
+void VectorStack<T>::pop() {
+    _container.popBack();
+}
+
+template<class T>
+T& VectorStack<T>::top() const {
+    return _container.back();
+}
+
+template<class T>
+size_t VectorStack<T>::size() const noexcept {
+    return _container.size();
+}
+
+template<class T>
+bool VectorStack<T>::empty() const noexcept {
+    return !size();
+}

@@ -2,16 +2,40 @@
 #include "StackImpl.h"
 #include "SLL.h"
 
-class LinkedListStack : public StackImpl {
+template<class T>
+class LinkedListStack : public StackImpl<T> {
 public:
-    LinkedListStack() { _container =  SLL(); }
-
-    void push(ValueType value) override { _container.pushFront(value); }
-    void pop() override { _container.popFront(); }
-    ValueType top() const override { return _container.front(); }
-    size_t size() const noexcept override { return _container.size(); }
-    bool empty() const noexcept override { return !size(); }
+    void push(T value) override;
+    void pop() override;
+    T& top() const override;
+    size_t size() const noexcept override;
+    bool empty() const noexcept override;
 
 private:
-    SLL _container;
+    SLL<T> _container;
 };
+
+template<class T>
+void LinkedListStack<T>::push(T value) {
+    _container.pushFront(value);
+}
+
+template<class T>
+void LinkedListStack<T>::pop() {
+    _container.popFront();
+}
+
+template<class T>
+T& LinkedListStack<T>::top() const {
+    return _container.front();
+}
+
+template<class T>
+size_t LinkedListStack<T>::size() const noexcept {
+    return _container.size();
+}
+
+template<class T>
+bool LinkedListStack<T>::empty() const noexcept {
+    return !size();
+}
