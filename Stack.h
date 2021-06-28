@@ -61,6 +61,7 @@ Stack<T>::Stack(const Stack<T>& other) {
         push(data[i]);
         other._impl->push(data[i]);
     }
+    delete[] data;
 }
 
 template<class T>
@@ -93,6 +94,7 @@ Stack<T>& Stack<T>::operator=(const Stack<T>& other) {
             push(data[i]);
             other._impl->push(data[i]);
         }
+        delete[] data;
     }
     return *this;
 }
